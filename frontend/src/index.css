@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #ffffff;
+  color:rgb(38, 40, 41);
+}
+
+.hero-section {
+  background-image: url('https://img.freepik.com/free-photo/portrait-male-holding-red-rose-flower-hand-looking-camera_23-2148075463.jpg?t=st=1739066783~exp=1739070383~hmac=8e299e531d0b7bb051e164d74adefc778451d4a6e3d78b624333aad8da81cdd7&w=1380');
+  background-size: contain; /* Para mantener la relación de aspecto de la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-position: right center; /* Ajusta la posición de la imagen */
+  background-color: #ffffff;
+  height: 300px; /* Ajusta la altura según sea necesario */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: black;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(63, 68, 64, 0.1);
+}
+
+.content {
+  background-color: #ffffff; /* Color de fondo blanco */
+  padding: 20px; /* Añade relleno para separar el texto del borde */
+}
+
+h2{
+  text-align: center;
+  color:rgb(10, 130, 250);
+}
+
+.profile-table{
+  align-content: center;
+}
