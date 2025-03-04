@@ -17,10 +17,20 @@ const app = express();
 // CORS middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173", // Valor por defecto si CLIENT_URL no está definido
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Métodos permitidos
-    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"], // 🔥 Corregí la sintaxis
-    credentials: true, // Permitir cookies y autenticación basada en credenciales
+    origin: (origin, callback) => {
+      const allowedOrigins = [
+        "https://bouquet-verde-proyectofinal.onrender.com",
+        "https://bouquet-verde-frontend.onrender.com"
+      ];
+      if (allowedOrigins.includes(origin)) {
+        callback(null, origin);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
