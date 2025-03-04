@@ -19,7 +19,10 @@ app.use(
   cors({
     origin: ORIGIN, // Orígenes permitidos (pueden ser múltiples en el archivo config.js)
     methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
-    credentials: true, // Si necesitas permitir cookies en las solicitudes
+    allowedHeaders:[
+      'Content-Type',
+      'Authorization',
+      'Access-Control-Allow-Origin',
   })
 );
 
