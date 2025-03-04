@@ -18,7 +18,7 @@ const app = express();
 app.use(
   cors({
     origin: ORIGIN, // Orígenes permitidos (pueden ser múltiples en el archivo config.js)
-    methods: ["GET", "POST", "PUT", "DELETE"], // Métodos permitidos
+    methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'], // Métodos permitidos
     allowedHeaders: [
       'Content-Type',
       'Authorization',
