@@ -17,7 +17,7 @@ const app = express();
 // CORS middleware
 app.use(
   cors({
-    origin: [CLIENT_URL], // Agrega los orígenes permitidos
+    origin: [process.env.CLIENT_URL], // Usar la variable de entorno
     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'], // Métodos permitidos
     allowedHeaders: [
       'Content-Type',
