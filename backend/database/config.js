@@ -3,14 +3,8 @@ export const PORT = process.env.PORT || 3000;
 export const PG_PORT = process.env.PG_PORT || 5432;
 export const PG_HOST = process.env.PG_HOST || "localhost";
 export const PG_USER = process.env.PG_USER || "postgres";
-export const PG_PASSWORD = process.env.PG_PASSWORD || "123";
-export const PG_DATABASE = process.env.PG_DATABASE || "bouquet";  
+export const PG_PASSWORD = process.env.PG_PASSWORD || "123456";
+export const PG_DATABASE = process.env.PG_DATABASE || "bouquet";
 
-// Configuración de ORIGEN (CORS)
-export const ORIGIN = process.env.ORIGIN
-  ? process.env.ORIGIN.split(",") // Convierte la lista de orígenes en un array
-  : [
-      "http://localhost:5173", // Valor por defecto para desarrollo local
-      "https://bouquet-verde-proyectofinal.onrender.com", // Valor por defecto para producción
-    ];
+export const ORIGIN = process.env.ORIGIN || "http://localhost:5173";
     

@@ -5,7 +5,9 @@ import md5 from 'md5'
 
 export const signin = async (req, res) => {
   const { email, password } = req.body;
-  const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+  const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+    email,
+  ]);
 
   if (result.rowCount === 0) {
     return res.status(400).json({
@@ -17,7 +19,7 @@ export const signin = async (req, res) => {
 
   if (!validPassword) {
     return res.status(400).json({
-      message: "la contraseña es incorrecta",
+      message: "la constraseña es incorrecta",
     });
   }
 
@@ -38,7 +40,7 @@ export const signup = async (req, res, next) => {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const gravatar = `https://www.gravatar.com/avatar/${md5(email)}?d=wavatar`;
+    const gravatar = `https://www.gravatar.com/avatar/${md5(email)}?d=wavatar`
 
     const result = await pool.query(
       "INSERT INTO users(name, email, password, gravatar) VALUES($1, $2, $3, $4) RETURNING *",
