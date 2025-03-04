@@ -17,14 +17,10 @@ const app = express();
 // CORS middleware
 app.use(
   cors({
-    origin: [process.env.CLIENT_URL], // Usar la variable de entorno
-    methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'], // Métodos permitidos
-    allowedHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Access-Control-Allow-Origin',
-    ],
-    credentials: true, // 🔥 Esto permite cookies y autenticación basada en credenciales
+    origin: process.env.CLIENT_URL || "http://localhost:5173", // Valor por defecto si CLIENT_URL no está definido
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"], // Métodos permitidos
+    allowedHeaders: ["Content-Type", "Authorization", "Access-Control-Allow-Origin"], // 🔥 Corregí la sintaxis
+    credentials: true, // Permitir cookies y autenticación basada en credenciales
   })
 );
 
@@ -36,8 +32,12 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app.get("/", (req, res) => res.json({ message: "Bienvenido a mi API" }));
 app.get("/api/ping", async (req, res) => {
-  const result = await pool.query("SELECT NOW()");
-  return res.json(result.rows[0]);
+  try {
+    const result = await pool.query("SELECT NOW()");
+    return res.json(result.rows[0]);
+  } catch (error) {
+    res.status(500).json({ status: "error", message: error.message });
+  }
 });
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
@@ -51,3 +51,4 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
