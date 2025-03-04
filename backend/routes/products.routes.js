@@ -12,14 +12,16 @@ import { createProductSchema, updateProductSchema } from "../schemas/product.sch
 
 const router = Router();
 
-router.get("/products", getAllProducts);
+// Rutas de productos con prefijo /api
+router.get("/products", getAllProducts); // Obtener todos los productos
 
-router.get("/products/:id", getProduct);
+router.get("/products/:id", getProduct); // Obtener un producto específico por ID
 
-router.post("/products", isAuth, validateSchema(createProductSchema), createProduct);
+router.post("/products", isAuth, validateSchema(createProductSchema), createProduct); // Crear un nuevo producto, con validación y autenticación
 
-router.put("/products/:id", isAuth, validateSchema(updateProductSchema), updateProduct);
+router.put("/products/:id", isAuth, validateSchema(updateProductSchema), updateProduct); // Actualizar un producto, con validación y autenticación
 
-router.delete("/products/:id", isAuth, deleteProduct);
+router.delete("/products/:id", isAuth, deleteProduct); // Eliminar un producto, con autenticación
 
 export default router;
+
