@@ -17,13 +17,14 @@ const app = express();
 // CORS middleware
 app.use(
   cors({
-    origin: ORIGIN, // Orígenes permitidos (pueden ser múltiples en el archivo config.js)
+    origin: ["http://localhost:5173", "https://bouquet-verde-proyectofinal.onrender.com"], // Agrega los orígenes permitidos
     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'], // Métodos permitidos
     allowedHeaders: [
       'Content-Type',
       'Authorization',
       'Access-Control-Allow-Origin',
-    ]
+    ],
+    credentials: true, // 🔥 Esto permite cookies y autenticación basada en credenciales
   })
 );
 
