@@ -13,8 +13,8 @@ const app = express();
 // Middlewares
 app.use(
   cors({
-    origin: ORIGIN,
-    credentials: true,
+    origin: [ORIGIN],
+   // credentials: true,
   })
 );
 app.use(morgan("dev"));
