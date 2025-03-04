@@ -6,7 +6,6 @@ import dotenv from "dotenv"; // Cargar variables de entorno
 
 import productRoutes from "./routes/products.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-import { ORIGIN } from "./database/config.js";
 import { pool } from "./database/db.js";
 
 // Cargar las variables de entorno
@@ -14,7 +13,7 @@ dotenv.config();
 
 const app = express();
 
-// CORS middleware
+// Middleware de CORS
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -22,7 +21,7 @@ app.use(
         "https://bouquet-verde-proyectofinal.onrender.com",
         "https://bouquet-verde-frontend.onrender.com"
       ];
-      if (allowedOrigins.includes(origin)) {
+      if (allowedOrigins.includes(origin) || !origin) {
         callback(null, origin);
       } else {
         callback(new Error("Not allowed by CORS"));
@@ -39,7 +38,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
+// Rutas
 app.get("/", (req, res) => res.json({ message: "Bienvenido a mi API" }));
 app.get("/api/ping", async (req, res) => {
   try {
@@ -52,7 +51,7 @@ app.get("/api/ping", async (req, res) => {
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
 
-// Error handler
+// Manejador de errores
 app.use((err, req, res, next) => {
   res.status(500).json({
     status: "error",
@@ -61,4 +60,5 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
 
