@@ -17,7 +17,7 @@ const app = express();
 // CORS middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://bouquet-verde-proyectofinal.onrender.com"], // Agrega los orígenes permitidos
+    origin: [CLIENT_URL], // Agrega los orígenes permitidos
     methods:['GET','POST','PUT','PATCH','DELETE','OPTIONS'], // Métodos permitidos
     allowedHeaders: [
       'Content-Type',

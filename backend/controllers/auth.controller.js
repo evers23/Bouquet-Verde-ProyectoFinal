@@ -4,7 +4,7 @@ import { createAccessToken } from "../libs/jwt.js";
 import md5 from 'md5'
 
 export const signin = async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const result = await pool.query("SELECT * FROM users WHERE email = $1", [
     email,
   ]);
