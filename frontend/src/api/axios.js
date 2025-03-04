@@ -9,3 +9,10 @@ const client = axios.create({
 
 export default client;
 
+client.post('/signup', {
+  // Datos de tu solicitud
+}).then(response => {
+  console.log(response.data);
+}).catch(error => {
+  console.error(error);
+});
