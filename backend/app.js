@@ -21,7 +21,7 @@ import { pool } from "./database/db.js";
 const corsOptions = {
   origin: 'https://bouquet-verde-proyectofinal.onrender.com',
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 };
 
