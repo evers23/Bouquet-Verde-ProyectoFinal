@@ -51,6 +51,12 @@ app.use((err, req, res, next) => {
   });
 });
 
+app.post("/api/signin", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://bouquet-verde-proyectofinal.onrender.com");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.json({ message: "Inicio de sesión exitoso" });
+  });
+
 export default app;
 
 
