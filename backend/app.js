@@ -14,7 +14,7 @@ const app = express();
 app.use(
   cors({
     origin: [ORIGIN],
-   //credentials: true, // Habilita el uso de cookies en el frontend
+   credentials: true, // Habilita el uso de cookies en el frontend
   })
 );
 app.use(morgan("dev"));
