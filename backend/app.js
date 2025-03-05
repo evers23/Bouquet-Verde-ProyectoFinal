@@ -5,36 +5,31 @@ import cors from "cors";
 
 import productRoutes from "./routes/products.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-import { ORIGIN } from "./database/config.js";
+import { ORIGIN } from "./database/config.js"; // Asegúrate de que ORIGIN esté bien definido
 import { pool } from "./database/db.js";
 
-//const app = express();
+// Inicializar Express
+const app = express();
 
-// Middlewares
-//app.use(
-  //cors({
-    //origin: [ORIGIN],
- //  credentials: true, // Habilita el uso de cookies en el frontend
- // })
-//);
-
+// Configuración de CORS
 const corsOptions = {
-  origin: 'https://bouquet-verde-proyectofinal.onrender.com',
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  origin: 'https://bouquet-verde-proyectofinal.onrender.com', // Origen permitido
+  credentials: true, // Habilita el uso de cookies en el frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
+  allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 };
 
+// Uso de CORS con las opciones definidas
 app.use(cors(corsOptions));
 
-app.options('*', cors(corsOptions));
+// Configurar los middlewares
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
-app.get("/", (req, res) => res.json({ message: " Bienvenido a mi API" }));
+// Rutas
+app.get("/", (req, res) => res.json({ message: "Bienvenido a mi API" }));
 app.get("/api/ping", async (req, res) => {
   const result = await pool.query("SELECT NOW()");
   return res.json(result.rows[0]);
@@ -42,9 +37,18 @@ app.get("/api/ping", async (req, res) => {
 app.use("/api", productRoutes);
 app.use("/api", authRoutes);
 
-// Error Hander
+// Manejo de solicitudes OPTIONS
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://bouquet-verde-proyectofinal.onrender.com");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.sendStatus(204); // 204 No Content
+});
+
+// Manejo de errores
 app.use((err, req, res, next) => {
-  console.log("err",err)
+  console.error("Error:", err);
   res.status(500).json({
     status: "error",
     message: err.message,
@@ -52,5 +56,6 @@ app.use((err, req, res, next) => {
 });
 
 export default app;
+
 
 
