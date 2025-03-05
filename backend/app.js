@@ -5,7 +5,6 @@ import cors from "cors";
 
 import productRoutes from "./routes/products.routes.js";
 import authRoutes from "./routes/auth.routes.js";
-import { ORIGIN } from "./database/config.js"; // Asegúrate de que ORIGIN esté bien definido
 import { pool } from "./database/db.js";
 
 // Inicializar Express
@@ -14,7 +13,7 @@ const app = express();
 // Configuración de CORS
 const corsOptions = {
   origin: 'https://bouquet-verde-proyectofinal.onrender.com', // Origen permitido
-  credentials: true, // Habilita el uso de cookies en el frontend
+  credentials: true, // Habilita el uso de cookies y autenticación con credenciales
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Métodos permitidos
   allowedHeaders: ['Content-Type', 'Authorization'], // Encabezados permitidos
 };
@@ -42,7 +41,7 @@ app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "https://bouquet-verde-proyectofinal.onrender.com");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Credentials", "true"); // Importante: Asegúrate de incluir esta cabecera
   res.sendStatus(204); // 204 No Content
 });
 
