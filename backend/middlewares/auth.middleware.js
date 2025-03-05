@@ -9,15 +9,13 @@ export const isAuth = (req, res, next) => {
     });
   }
 
-  jwt.verify(token, "xyz123", (err, decoded) => {
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err)
       return res.status(401).json({
         message: "No estas autorizado",
       });
 
-    req.userId = decoded.id;
-
-    console.log(decoded);
+    req.userId = decoded.id; // Store the decoded user ID
     next();
   });
 };
