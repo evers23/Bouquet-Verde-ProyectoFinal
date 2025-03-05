@@ -8,15 +8,26 @@ import authRoutes from "./routes/auth.routes.js";
 import { ORIGIN } from "./database/config.js";
 import { pool } from "./database/db.js";
 
-const app = express();
+//const app = express();
 
 // Middlewares
-app.use(
-  cors({
-    origin: [ORIGIN],
-   credentials: true, // Habilita el uso de cookies en el frontend
-  })
-);
+//app.use(
+  //cors({
+    //origin: [ORIGIN],
+ //  credentials: true, // Habilita el uso de cookies en el frontend
+ // })
+//);
+
+const corsOptions = {
+  origin: 'https://bouquet-verde-proyectofinal.onrender.com',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+
+app.use(cors(corsOptions));
+
+app.options('*', cors(corsOptions));
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
