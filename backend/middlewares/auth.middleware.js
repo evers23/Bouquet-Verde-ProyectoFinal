@@ -1,18 +1,21 @@
-// auth.middleware.js
 import jwt from "jsonwebtoken";
 
 export const isAuth = (req, res, next) => {
-  const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+  const token = req.cookies.token;
 
   if (!token) {
-    return res.status(401).json({ message: "No autorizado" });
+    return res.status(401).json({
+      message: "No estas autorizado",
+    });
   }
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.id;
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err)
+      return res.status(401).json({
+        message: "No estas autorizado",
+      });
+
+    req.userId = decoded.id; // Store the decoded user ID
     next();
-  } catch (error) {
-    return res.status(401).json({ message: "Token inválido" });
-  }
+  });
 };
