@@ -1,3 +1,4 @@
+//auth.controller.js
 import bcrypt from "bcrypt";
 import { pool } from "../database/db.js";
 
