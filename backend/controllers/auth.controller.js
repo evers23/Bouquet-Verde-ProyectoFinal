@@ -1,8 +1,6 @@
-//auth.controller.js
 import bcrypt from "bcrypt";
 import { pool } from "../database/db.js";
-import {isAuth} from "../libs/jwt.js"
-
+import { createAccessToken } from "../libs/jwt.js";
 import md5 from 'md5'
 
 export const signin = async (req, res) => {
@@ -25,7 +23,7 @@ export const signin = async (req, res) => {
     });
   }
 
-  const token = await isAuth({ id: result.rows[0].id });
+  const token = await createAccessToken({ id: result.rows[0].id });
 
   res.cookie("token", token, {
     httpOnly: true,
@@ -49,7 +47,7 @@ export const signup = async (req, res, next) => {
       [name, email, hashedPassword, gravatar]
     );
 
-    const token = await isAuth({ id: result.rows[0].id });
+    const token = await createAccessToken({ id: result.rows[0].id });
 
     res.cookie("token", token, {
       httpOnly: true,
